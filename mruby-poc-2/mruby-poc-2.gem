@@ -1,0 +1,7 @@
+name: mruby-poc-2
+description: PocPoc class
+author: Uchio Kondo
+website: https://github.com/udzura/mruby-poc-2
+protocol: git
+repository: https://github.com/udzura/mruby-poc-2.git
+license: MIT
