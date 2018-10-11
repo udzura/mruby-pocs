@@ -1,27 +1,42 @@
-# mruby-poc-1   [![Build Status](https://travis-ci.org/udzura/mruby-poc-1.svg?branch=master)](https://travis-ci.org/udzura/mruby-poc-1)
-PocPoc class
-## install by mrbgems
-- add conf.gem line to `build_config.rb`
+# mruby-poc-1
+
+Strange behavior in nil-guard assign to attribute
+
+```console
+$ rake
+$ ./mruby/bin/mruby -e 'PocPoc.run'
+
+trace (most recent call last):
+        [0] -e:1
+-e:1: undefined method 'attr1=' (NoMethodError)
+```
+
+---
 
 ```ruby
-MRuby::Build.new do |conf|
+class PocObj
+  attr_accessor :attr1
 
-    # ... (snip) ...
+  def fill_attr_if_nil
+    self.attr1 ||= :OK
+  end
 
-    conf.gem :github => 'udzura/mruby-poc-1'
+  def fill_attr_if_nil_2
+    unless self.attr1
+      self.attr1 = :OK
+    end
+  end
+end
+
+class PocPoc
+  def self.run
+    obj = PocObj.new
+    p obj.fill_attr_if_nil # Broken
+  end
+
+  def self.run2
+    obj = PocObj.new
+    p obj.fill_attr_if_nil_2 # OK
+  end
 end
 ```
-## example
-```ruby
-p PocPoc.hi
-#=> "hi!!"
-t = PocPoc.new "hello"
-p t.hello
-#=> "hello"
-p t.bye
-#=> "hello bye"
-```
-
-## License
-under the MIT License:
-- see LICENSE file
