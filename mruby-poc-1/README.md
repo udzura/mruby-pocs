@@ -1,4 +1,8 @@
-# mruby-poc-1
+# [Fixed] mruby-poc-1
+
+This bug fixed after commit [fdd5ce8fac8f306f71f336f07f0a537b8626e6d6](https://github.com/mruby/mruby/commit/fdd5ce8fac8f306f71f336f07f0a537b8626e6d6).
+
+----
 
 Strange behavior in nil-guard assign to attribute
 
